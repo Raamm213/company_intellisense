@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Intel | AI Intelligence Extraction</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AI-powered company intelligence extraction and validation using Gemini, Groq, and Cerebras models.">
+    <meta name="keywords" content="Company Intelligence, AI, Data Extraction, LLM, Gemini, Groq, Cerebras">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css?v=1.1">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo" title="Company Intel">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <div class="nav-icons">
+                    <button id="nav-search" class="nav-btn active" data-tab="search" title="Intelligence Search">
+                        <i class="fas fa-magnifying-glass"></i>
+                    </button>
+                    <button id="nav-history" class="nav-btn" data-tab="history" title="Search History">
+                        <i class="fas fa-clock-rotate-left"></i>
+                    </button>
+                    <button id="nav-analytics" class="nav-btn" data-tab="analytics" title="Global Analytics">
+                        <i class="fas fa-chart-line"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="sidebar-bottom">
+                <button class="nav-btn" title="API Status">
+                    <i class="fas fa-server"></i>
+                </button>
+                <button class="nav-btn" title="Settings">
+                    <i class="fas fa-sliders"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Search View -->
+            <section id="search-tab" class="tab-content active">
+                <header class="view-header">
+                    <h1>Enterprise Intelligence</h1>
+                    <p>Extracting high-fidelity company data using multi-agent cross-validation.</p>
+                </header>
+
+                <div class="search-container">
+                    <div class="search-box glass">
+                        <div class="search-input-group">
+                            <i class="fas fa-building search-field-icon"></i>
+                            <input type="text" id="company-name" placeholder="Enter company name (e.g. NVIDIA)..." spellcheck="false" autocomplete="off">
+                        </div>
+                        <button id="trigger-btn" class="action-btn">
+                            <span>Extract Intelligence</span>
+                            <i class="fas fa-bolt-lightning"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="results-view" class="results-view hidden">
+                    <div class="metrics-grid">
+                        <div class="metric-item glass">
+                            <label><i class="fas fa-stopwatch"></i> Execution Time</label>
+                            <div class="val" id="time-val">0.0s</div>
+                        </div>
+                        <div class="metric-item glass">
+                            <label><i class="fas fa-coins"></i> Tokens Used</label>
+                            <div class="val" id="tokens-val">0</div>
+                        </div>
+                        <div class="metric-item glass">
+                            <label><i class="fas fa-list-check"></i> Parameters</label>
+                            <div class="val" id="params-val">0</div>
+                        </div>
+                        <div class="metric-item glass">
+                            <label><i class="fas fa-shield-check"></i> Validation</label>
+                            <div class="val" id="validation-val">100%</div>
+                        </div>
+                    </div>
+
+                    <div id="validation-error-card" class="output-card glass hidden" style="border-left: 4px solid var(--error-color);">
+                        <div class="card-header">
+                            <h3 style="color: var(--error-color);"><i class="fas fa-triangle-exclamation"></i> Data Quality Warnings</h3>
+                        </div>
+                        <div class="error-list" id="validation-errors">
+                            <!-- Injected via script.js -->
+                        </div>
+                    </div>
+
+                    <div class="output-card glass">
+                        <div class="card-header">
+                            <h3><i class="fas fa-file-invoice"></i> Consolidated Corporate Profile</h3>
+                            <div class="card-tools">
+                                <button id="btn-copy" class="tool-btn" title="Copy JSON"><i class="fas fa-copy"></i></button>
+                                <button id="btn-download" class="tool-btn" title="Download JSON"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="json-wrapper">
+                            <pre id="json-output"></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div id="status-view" class="status-view hidden">
+                    <div class="spinner"></div>
+                    <div class="status-content">
+                        <h3 id="status-text">Orchestrating AI Agents...</h3>
+                        <p>Aggregating insights from Gemini, Groq & Cerebras infrastructure.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History View -->
+            <section id="history-tab" class="tab-content">
+                <header class="view-header">
+                    <h1>Intelligence Archive</h1>
+                    <p>Review and compare previously extracted corporate intelligence.</p>
+                </header>
+
+                <div class="history-card glass">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-building"></i> Company</th>
+                                <th><i class="fas fa-calendar-alt"></i> Date Extracted</th>
+                                <th><i class="fas fa-gears"></i> Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-rows">
+                            <!-- Injected via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Details Modal -->
+    <div id="modal-container" class="modal-overlay hidden">
+        <div class="modal-content glass">
+            <header class="modal-header">
+                <h2 id="modal-title">Company Profile</h2>
+                <button id="modal-close" class="tool-btn"><i class="fas fa-times"></i></button>
+            </header>
+            <div class="json-wrapper">
+                <pre id="modal-json"></pre>
+            </div>
+            <div class="card-header" style="border-top: 1px solid var(--border-color); border-bottom: none;">
+                <div class="card-tools" style="width: 100%; justify-content: flex-end;">
+                     <button id="modal-download" class="action-btn" style="padding: 8px 16px; font-size: 0.9rem;">
+                        <i class="fas fa-download"></i> Export Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UI Interaction Scripts -->
+    <script src="/static/script.js"></script>
+</body>
+</html>

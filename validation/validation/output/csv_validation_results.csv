@@ -1,0 +1,163 @@
+test_case_id,test_case_name,test_case_result,test_case_error
+Company Name,Company Name,pass,
+Short Name,Short Name,pass,
+Logo,Logo,pass,
+Category,Category,fail,companies.csv#row1: Category does not match regex ^(Startup|MSME|SMB|Enterprise|Investor|VC|Conglomerate)$
+Year of Incorporation,Year of Incorporation,fail,companies.csv#row1: Year of Incorporation does not match regex ^(19|20) 
+Overview of the Company,Overview of the Company,pass,
+Nature of Company,Nature of Company,fail,companies.csv#row1: Nature of Company does not match regex ^(Private|Public|Subsidiary|Partnership|Non-Profit|Govt)$
+Company Headquarters,Company Headquarters,pass,
+Countries Operating In,Countries Operating In,fail,"companies.csv#row1: Countries Operating In does not match regex ^([A-Za-z\s]+)(,\s*[A-Za-z\s]+)*$"
+Number of Offices (beyond HQ),Number of Offices (beyond HQ),fail,companies.csv#row1: Number of Offices (beyond HQ) does not match regex ^\d+$; Number of Offices (beyond HQ) length above maximum 10
+Office Locations,Office Locations,pass,
+Employee Size,Employee Size,fail,companies.csv#row1: Employee Size does not match regex ^(\d+|\d+-\d+)$; Employee Size length above maximum 20
+Hiring Velocity,Hiring Velocity,pass,
+Employee Turnover,Employee Turnover,fail,"companies.csv#row1: Employee Turnover does not match regex ^\d{1,3}(\.\d{1,2})?%$; Employee Turnover length above maximum 10"
+Average Retention Tenure,Average Retention Tenure,fail,companies.csv#row1: Average Retention Tenure does not match regex ^\d+(\.\d+)?\s?(Years?|Months?)$; Average Retention Tenure length above maximum 20
+Pain Points Being Addressed,Pain Points Being Addressed,pass,
+Focus Sectors / Industries,Focus Sectors / Industries,pass,
+Services / Offerings / Products,Services / Offerings / Products,pass,
+Top Customers by Client Segments,Top Customers by Client Segments,pass,
+Core Value Proposition,Core Value Proposition,pass,
+Vision,Vision,pass,
+Mission,Mission,pass,
+Values,Values,pass,
+Unique Differentiators,Unique Differentiators,pass,
+Competitive Advantages,Competitive Advantages,pass,
+Weaknesses / Gaps in Offering,Weaknesses / Gaps in Offering,pass,
+Key Challenges and Unmet Needs,Key Challenges and Unmet Needs,pass,
+Key Competitors,Key Competitors,pass,
+Technology Partners,Technology Partners,pass,
+Interesting Facts,Interesting Facts,pass,
+Recent News,Recent News,pass,
+Website URL,Website URL,pass,
+Quality of Website,Quality of Website,fail,companies.csv#row1: Quality of Website length below minimum 10
+Website Rating,Website Rating,fail,companies.csv#row1: Website Rating does not match regex ^(10(\.0)?|[0-9](\.\d)?)$; Website Rating length above maximum 4
+Website Traffic Rank,Website Traffic Rank,pass,
+Social Media Followers – Combined,Social Media Followers – Combined,fail,companies.csv#row1: Social Media Followers – Combined does not match regex ^\d+$; Social Media Followers – Combined length above maximum 20
+Glassdoor Rating,Glassdoor Rating,fail,companies.csv#row1: Glassdoor Rating does not match regex ^[1-5](\.\d)?$; Glassdoor Rating length above maximum 3
+Indeed Rating,Indeed Rating,fail,companies.csv#row1: Indeed Rating does not match regex ^[1-5](\.\d)?$; Indeed Rating length above maximum 3
+Google Reviews Rating,Google Reviews Rating,fail,companies.csv#row1: Google Reviews Rating does not match regex ^[1-5](\.\d)?$; Google Reviews Rating length above maximum 3
+LinkedIn Profile URL,LinkedIn Profile URL,pass,
+Twitter (X) Handle,Twitter (X) Handle,pass,
+Facebook Page URL,Facebook Page URL,pass,
+Instagram Page URL,Instagram Page URL,pass,
+CEO Name,CEO Name,pass,
+CEO LinkedIn URL,CEO LinkedIn URL,pass,
+Key Business Leaders,Key Business Leaders,pass,
+Warm Introduction Pathways,Warm Introduction Pathways,pass,
+Decision Maker Accessibility,Decision Maker Accessibility,pass,
+Company Contact Email,Company Contact Email,pass,
+Company Phone Number,Company Phone Number,fail,"companies.csv#row1: Company Phone Number does not match regex ^\+?[1-9]\d{1,14}$"
+Primary Contact Person's Name,Primary Contact Person's Name,pass,
+Primary Contact Person's Title,Primary Contact Person's Title,pass,
+Primary Contact Person's Email,Primary Contact Person's Email,pass,
+Primary Contact Person's Phone Number,Primary Contact Person's Phone Number,pass,
+Awards & Recognitions,Awards & Recognitions,pass,
+Brand Sentiment Score,Brand Sentiment Score,pass,
+Event Participation,Event Participation,pass,
+Regulatory & Compliance Status,Regulatory & Compliance Status,pass,
+Legal Issues / Controversies,Legal Issues / Controversies,pass,
+Annual Revenues,Annual Revenues,fail,companies.csv#row1: Annual Revenues length above maximum 20
+Annual Profits,Annual Profits,fail,companies.csv#row1: Annual Profits length above maximum 20
+Revenue Mix,Revenue Mix,fail,"companies.csv#row1: Revenue Mix does not match regex ^\d{1,3}%?\s?\/\s?\d{1,3}%?$"
+Company Valuation,Company Valuation,fail,"companies.csv#row1: Company Valuation does not match regex ^\$?[\d,]+(\.\d{2})?[KkMmBb]?$; Company Valuation length above maximum 20"
+Year-over-Year Growth Rate,Year-over-Year Growth Rate,fail,"companies.csv#row1: Year-over-Year Growth Rate does not match regex ^[+-]?\d{1,3}(\.\d{1,2})?%$; Year-over-Year Growth Rate length above maximum 10"
+Profitability Status,Profitability Status,pass,
+Market Share (%),Market Share (%),fail,"companies.csv#row1: Market Share (%) does not match regex ^\d{1,3}(\.\d{1,2})?%$; Market Share (%) length above maximum 10"
+Key Investors / Backers,Key Investors / Backers,pass,
+Recent Funding Rounds,Recent Funding Rounds,pass,
+Total Capital Raised,Total Capital Raised,pass,
+ESG Practices or Ratings,ESG Practices or Ratings,pass,
+Sales Motion,Sales Motion,fail,companies.csv#row1: Sales Motion does not match regex ^(PLG|Product-Led|Sales-Led|Field Sales|Channel|Hybrid).*$; Sales Motion length above maximum 100
+Customer Acquisition Cost (CAC),Customer Acquisition Cost (CAC),pass,
+Customer Lifetime Value (CLV),Customer Lifetime Value (CLV),pass,
+CAC:LTV Ratio,CAC:LTV Ratio,pass,
+Churn Rate,Churn Rate,pass,
+Net Promoter Score (NPS),Net Promoter Score (NPS),fail,companies.csv#row1: Net Promoter Score (NPS) does not match regex ^-?(100|[1-9]\d?|0)$; Net Promoter Score (NPS) length above maximum 4
+Customer Concentration Risk,Customer Concentration Risk,pass,
+Burn Rate,Burn Rate,pass,
+Runway,Runway,pass,
+Burn Multiplier,Burn Multiplier,pass,
+Intellectual Property,Intellectual Property,pass,
+R&D Investment,R&D Investment,fail,"companies.csv#row1: R&D Investment does not match regex ^\$?[\d,]+(\.\d{2})?[KkMmBb]?$; R&D Investment length above maximum 20"
+AI/ML Adoption Level,AI/ML Adoption Level,fail,companies.csv#row1: AI/ML Adoption Level length below minimum 5
+Tech Stack/Tools Used,Tech Stack/Tools Used,pass,
+Cybersecurity Posture,Cybersecurity Posture,pass,
+Supply Chain Dependencies,Supply Chain Dependencies,pass,
+Geopolitical Risks,Geopolitical Risks,pass,
+Macro Risks,Macro Risks,pass,
+Diversity Metrics,Diversity Metrics,pass,
+Remote Work Policy,Remote Work Policy,fail,companies.csv#row1: Remote Work Policy does not match regex ^(Remote|Hybrid|On-Site|Office-First).*$; Remote Work Policy length above maximum 100
+Training/Development Spend,Training/Development Spend,fail,"companies.csv#row1: Training/Development Spend does not match regex ^\$?[\d,]+(\.\d{2})?(\s?\/|\s?per)?.*$; Training/Development Spend length above maximum 20"
+Partnership Ecosystem,Partnership Ecosystem,fail,companies.csv#row1: Partnership Ecosystem length below minimum 10
+Exit Strategy/History,Exit Strategy/History,pass,
+Carbon Footprint/Environmental Impact,Carbon Footprint/Environmental Impact,fail,companies.csv#row1: Carbon Footprint/Environmental Impact does not match regex ^[\d\.]+\s?CO2e$
+Ethical Sourcing Practices,Ethical Sourcing Practices,fail,companies.csv#row1: Ethical Sourcing Practices does not match regex (?i).*(Fair Trade|Conflict-free).*
+Benchmark vs. Peers,Benchmark vs. Peers,pass,
+Future Projections,Future Projections,fail,companies.csv#row1: Future Projections does not match regex (?i)[\s\S]*(202[6-9]|20[3-9][0-9]|Q[1-4])[\s\S]*
+Strategic Priorities,Strategic Priorities,pass,
+Industry Associations / Memberships,Industry Associations / Memberships,pass,
+Case Studies / Public Success Stories,Case Studies / Public Success Stories,fail,companies.csv#row1: Case Studies / Public Success Stories does not match regex ^.+ - https?:\/\/.+ - .+$
+Go-to-Market Strategy,Go-to-Market Strategy,fail,companies.csv#row1: Go-to-Market Strategy is required but missing
+Innovation Roadmap,Innovation Roadmap,pass,
+Product Pipeline,Product Pipeline,pass,
+Board of Directors / Advisors,Board of Directors / Advisors,pass,
+Company Introduction / Marketing videos,Company Introduction / Marketing videos,fail,companies.csv#row1: Company Introduction / Marketing videos does not match regex ^https?:\/\/(www\.)?(youtube\.com|vimeo\.com|youtu\.be)\/.*$
+Customer testimonial,Customer testimonial,pass,
+Total Addressable Market (TAM),Total Addressable Market (TAM),pass,
+Serviceable Addressable Market (SAM),Serviceable Addressable Market (SAM),pass,
+Serviceable Obtainable Market (SOM),Serviceable Obtainable Market (SOM),pass,
+Work culture,Work culture,pass,
+Manager quality,Manager quality,pass,
+Psychological safety,Psychological safety,fail,companies.csv#row1: Psychological safety does not match regex ^(Low|Medium|High|Safe|Toxic).*$; Psychological safety length above maximum 100
+Feedback culture,Feedback culture,pass,
+Diversity & inclusion,Diversity & inclusion,pass,
+Ethical standards,Ethical standards,pass,
+Typical working hours,Typical working hours,fail,"companies.csv#row1: Typical working hours does not match regex ^(\d{1,2}(?::\d{2})?\s?(?:AM|PM|am|pm)?\s?-\s?\d{1,2}(?::\d{2})?\s?(?:AM|PM|am|pm)?|Flexible|Fixed).*$; Typical working hours length above maximum 50"
+Overtime expectations,Overtime expectations,fail,companies.csv#row1: Overtime expectations does not match regex ^(Routine|Rare|Seasonal|Frequent|Occasional).*$; Overtime expectations length above maximum 100
+Weekend work,Weekend work,fail,companies.csv#row1: Weekend work does not match regex ^(Never|Rarely|Occasionally|Frequently|Always).*$; Weekend work length above maximum 50
+Remote / hybrid / on-site flexibility,Remote / hybrid / on-site flexibility,fail,companies.csv#row1: Remote / hybrid / on-site flexibility does not match regex ^(Remote|Hybrid|On-Site|Flexible Choice).*$; Remote / hybrid / on-site flexibility length above maximum 50
+Leave policy,Leave policy,pass,
+Burnout risk,Burnout risk,fail,companies.csv#row1: Burnout risk does not match regex ^(Low|Medium|High|Severe).*$; Burnout risk length above maximum 20
+Central vs peripheral location,Central vs peripheral location,fail,companies.csv#row1: Central vs peripheral location does not match regex ^(Central|Peripheral|CBD|Suburbs|Remote).*$; Central vs peripheral location length above maximum 50
+Public transport access,Public transport access,fail,companies.csv#row1: Public transport access does not match regex ^(Poor|Good|Excellent|Metro Connected|Bus only).*$; Public transport access length above maximum 50
+Cab availability and company cab policy,Cab availability and company cab policy,pass,
+Commute time from airport,Commute time from airport,fail,companies.csv#row1: Commute time from airport does not match regex ^\d+$; Commute time from airport length above maximum 20
+Office zone type,Office zone type,fail,companies.csv#row1: Office zone type does not match regex ^(Tech Park|SEZ|Commercial|Residential|Mixed).*$
+Area safety,Area safety,fail,companies.csv#row1: Area safety does not match regex ^(Safe|Moderate|Unsafe|High Crime).*$; Area safety length above maximum 50
+Company safety policies,Company safety policies,pass,
+Office infrastructure safety,Office infrastructure safety,fail,companies.csv#row1: Office infrastructure safety does not match regex ^(Compliant|Non-Compliant|Certified).*$; Office infrastructure safety length above maximum 50
+Emergency response preparedness,Emergency response preparedness,pass,
+Health support,Health support,pass,
+Onboarding and training quality,Onboarding and training quality,fail,companies.csv#row1: Onboarding and training quality does not match regex ^(Poor|Average|Good|Structured|Ad-hoc).*$
+Learning culture,Learning culture,pass,
+Exposure quality,Exposure quality,pass,
+Mentorship availability,Mentorship availability,pass,
+Internal mobility,Internal mobility,pass,
+Promotion clarity,Promotion clarity,pass,
+Tools and technology access,Tools and technology access,pass,
+Role clarity,Role clarity,pass,
+Early ownership,Early ownership,pass,
+Work impact,Work impact,pass,
+Execution vs thinking balance,Execution vs thinking balance,pass,
+Automation level,Automation level,pass,
+Cross-functional exposure,Cross-functional exposure,pass,
+Company maturity,Company maturity,fail,companies.csv#row1: Company maturity does not match regex ^(Startup|Scale-up|Mature|Enterprise|Declining).*$
+Brand value,Brand value,fail,companies.csv#row1: Brand value does not match regex ^(Tier 1|Tier 2|Tier 3|Unkown|Unicorn).*$
+Client quality,Client quality,fail,companies.csv#row1: Client quality does not match regex ^(Fortune 500|Enterprise|SMB|Mid-market).*$
+Layoff history,Layoff history,pass,
+Fixed vs variable pay,Fixed vs variable pay,fail,"companies.csv#row1: Fixed vs variable pay does not match regex ^(\d{1,3}:\d{1,3}|Fixed Only|Variable Heavy).*$; Fixed vs variable pay length above maximum 50"
+Bonus predictability,Bonus predictability,fail,companies.csv#row1: Bonus predictability does not match regex ^(Guaranteed|Performance-linked|Discretionary|Unpredictable).*$; Bonus predictability length above maximum 50
+ESOPs and long-term incentives,ESOPs and long-term incentives,pass,
+Family health insurance,Family health insurance,pass,
+Relocation support,Relocation support,pass,
+Lifestyle and wellness benefits,Lifestyle and wellness benefits,pass,
+Exit opportunities,Exit opportunities,pass,
+Skill relevance,Skill relevance,pass,
+External recognition,External recognition,pass,
+Network strength,Network strength,pass,
+Global exposure,Global exposure,pass,
+Mission clarity,Mission clarity,fail,companies.csv#row1: Mission clarity does not match regex ^(Clear|Confusing|Generic|Inspiring).*$; Mission clarity length above maximum 50
+Sustainability and CSR,Sustainability and CSR,pass,
+Crisis behavior,Crisis behavior,pass,

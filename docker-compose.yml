@@ -1,0 +1,15 @@
+services:
+  api:
+    build: .
+    container_name: company-intel-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: always
+
+# Optional: Add Supabase local development if needed, but here we assume remote Supabase

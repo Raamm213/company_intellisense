@@ -1,0 +1,2 @@
+test_case_id,test_case_name,test_case_result,test_case_error
+tests_generated/test_csv_folder_validation.py::test_csv_folder_rows_nullability,test_csv_folder_rows_nullability,pass,

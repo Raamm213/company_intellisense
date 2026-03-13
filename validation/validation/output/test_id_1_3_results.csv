@@ -1,0 +1,4 @@
+test_case_id,test_case_name,test_case_result,test_case_error
+tests_generated/test_id_1_3.py::test_company_name_special_characters[TC-1.3-COMPANYNAME-01],test_company_name_special_characters[TC-1.3-COMPANYNAME-01],pass,
+tests_generated/test_id_1_3.py::test_company_name_special_characters[TC-1.3-COMPANYNAME-02],test_company_name_special_characters[TC-1.3-COMPANYNAME-02],pass,
+tests_generated/test_id_1_3.py::test_company_name_special_characters[TC-1.3-COMPANYNAME-03],test_company_name_special_characters[TC-1.3-COMPANYNAME-03],pass,

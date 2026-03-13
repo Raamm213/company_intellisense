@@ -1,0 +1,4 @@
+﻿column_name,Test ID,Test Case Description,Input Data,Expected Result
+Company Name,TC-1.2-COMPANYNAME-01,Validate rejection of empty company name,"""""",Fail — Violates Not Null rule and business requirement: Must match official registration (Validation: Automated & Manual)
+Company Name,TC-1.2-COMPANYNAME-02,Validate rejection of whitespace-only company name,""" """,Fail — Must contain valid legal name characters per regex
+Company Name,TC-1.2-COMPANYNAME-03,Validate rejection of NULL company name,NULL,Fail — Required legal identity field

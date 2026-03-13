@@ -1,0 +1,10 @@
+{
+  "python_version": "3.11",
+  "dependencies": [
+    "./"
+  ],
+  "graphs": {
+    "company_intel": "./graph.py:graph"
+  },
+  "env": ".env"
+}

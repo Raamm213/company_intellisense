@@ -1,0 +1,4 @@
+﻿column_name,Test ID,Test Case Description,Input Data (Valid Examples Based on Regex & Format Constraints),Expected Result
+Company Name,TC-1.1-COMPANYNAME-01,Validate that a full legal company name is accepted when correctly formatted,Microsoft Corporation,"Pass — Must comply with regex ^[\w\s&.,\-\(\)'\u00C0-\u017F]+$and business rule: Must match official government registration documents (Validation Mode: Automated & Manual)"
+Company Name,TC-1.1-COMPANYNAME-02,Validate that a legally formatted company name with punctuation is accepted,"Tesla, Inc.",Pass — Input matches allowed punctuation and legal naming format per regex and official registration rule
+Company Name,TC-1.1-COMPANYNAME-03,Validate acceptance of standard multinational corporate naming,Apple Inc.,Pass — Must be UTF-8 compliant and formatted in Standard Case

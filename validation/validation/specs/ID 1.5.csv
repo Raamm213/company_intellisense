@@ -1,0 +1,6 @@
+﻿column_name,Test ID,Test Case Description,Input Data (Malformed Example),Expected Result
+Company Name,TC-1.4-COMPANYNAME-01,Validate detection of misspelled legal company name,Microsft Corporation,Fail — Violates business rule: Must match official government registration documents (Validation: Automated & Manual)
+Company Name,TC-1.4-COMPANYNAME-02,Validate rejection of incomplete legal company name,App,Fail — Below minimum legal identity completeness
+Company Name,TC-1.4-COMPANYNAME-03,Validate rejection of abbreviated company name,Goog,Fail — Must match official registered company name
+Company Name,TC-1.4-COMPANYNAME-04,Validate detection of phonetic misspelling,Mikrosoft Corp,Fail — Does not match official registration record
+Company Name,TC-1.4-COMPANYNAME-05,Validate detection of truncated legal name,Tesla,"Fail — Missing legal suffix (Inc., Ltd., Corp.)"

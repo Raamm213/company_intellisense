@@ -1,0 +1,5 @@
+﻿column_name,Test ID,Test Case Description,Input Data (Regex-Aligned Example),Expected Result
+Company Name,TC-1.3-COMPANYNAME-01,Validate company name acceptance of legal special characters,Company™ & Co.®,"Pass — Allowed under UTF-8 support and regex ^[\w\s&.,\-\(\)'\u00C0-\u017F]+$"
+,,,,; must match legal registration (Validation: Automated & Manual)
+Company Name,TC-1.3-COMPANYNAME-02,Validate rejection of unsupported symbol-only name,@#$%^&*(),Fail — Violates regex and legal identity rules
+Company Name,TC-1.3-COMPANYNAME-03,Validate acceptance of accented characters,Café Résumé Holdings,Pass — UTF-8 supported; aligns with legal naming policy

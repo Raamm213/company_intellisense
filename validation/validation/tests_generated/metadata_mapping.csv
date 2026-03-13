@@ -1,0 +1,164 @@
+column_name,csv_header
+Company Name,name
+Short Name,short_name
+Logo,logo_url
+Category,category
+Year of Incorporation,incorporation_year
+Overview of the Company,overview_text
+Nature of Company,nature_of_company
+Company Headquarters,headquarters_address
+Countries Operating In,operating_countries
+Number of Offices (beyond HQ),office_count
+Office Locations,office_locations
+Employee Size,employee_size
+Hiring Velocity,hiring_velocity
+Employee Turnover,employee_turnover
+Average Retention Tenure,avg_retention_tenure
+Pain Points Being Addressed,pain_points_addressed
+Focus Sectors / Industries,focus_sectors
+Services / Offerings / Products,offerings_description
+Top Customers by Client Segments,top_customers
+Core Value Proposition,core_value_proposition
+Vision,vision_statement
+Mission,mission_statement
+Values,core_values
+Unique Differentiators,unique_differentiators
+Competitive Advantages,competitive_advantages
+Weaknesses / Gaps in Offering,weaknesses_gaps
+Key Challenges and Unmet Needs,key_challenges_needs
+Key Competitors,key_competitors
+Technology Partners,technology_partners
+Interesting Facts,history_timeline
+Recent News,recent_news
+Website URL,website_url
+Quality of Website,website_quality
+Website Rating,website_rating
+Website Traffic Rank,website_traffic_rank
+Social Media Followers – Combined,social_media_followers
+Glassdoor Rating,glassdoor_rating
+Indeed Rating,indeed_rating
+Google Reviews Rating,google_rating
+LinkedIn Profile URL,linkedin_url
+Twitter (X) Handle,twitter_handle
+Facebook Page URL,facebook_url
+Instagram Page URL,instagram_url
+CEO Name,ceo_name
+CEO LinkedIn URL,ceo_linkedin_url
+Key Business Leaders,key_leaders
+Warm Introduction Pathways,warm_intro_pathways
+Decision Maker Accessibility,decision_maker_access
+Company Contact Email,primary_contact_email
+Company Phone Number,primary_phone_number
+Primary Contact Person's Name,contact_person_name
+Primary Contact Person's Title,contact_person_title
+Primary Contact Person's Email,contact_person_email
+Primary Contact Person's Phone Number,contact_person_phone
+Awards & Recognitions,awards_recognitions
+Brand Sentiment Score,brand_sentiment_score
+Event Participation,event_participation
+Regulatory & Compliance Status,regulatory_status
+Legal Issues / Controversies,legal_issues
+Annual Revenues,annual_revenue
+Annual Profits,annual_profit
+Revenue Mix,revenue_mix
+Company Valuation,valuation
+Year-over-Year Growth Rate,yoy_growth_rate
+Profitability Status,profitability_status
+Market Share (%),market_share_percentage
+Key Investors / Backers,key_investors
+Recent Funding Rounds,recent_funding_rounds
+Total Capital Raised,total_capital_raised
+ESG Practices or Ratings,esg_ratings
+Sales Motion,sales_motion
+Customer Acquisition Cost (CAC),customer_acquisition_cost
+Customer Lifetime Value (CLV),customer_lifetime_value
+CAC:LTV Ratio,cac_ltv_ratio
+Churn Rate,churn_rate
+Net Promoter Score (NPS),net_promoter_score
+Customer Concentration Risk,customer_concentration_risk
+Burn Rate,burn_rate
+Runway,runway_months
+Burn Multiplier,burn_multiplier
+Intellectual Property,intellectual_property
+R&D Investment,r_and_d_investment
+AI/ML Adoption Level,ai_ml_adoption_level
+Tech Stack/Tools Used,tech_stack
+Cybersecurity Posture,cybersecurity_posture
+Supply Chain Dependencies,supply_chain_dependencies
+Geopolitical Risks,geopolitical_risks
+Macro Risks,macro_risks
+Diversity Metrics,diversity_metrics
+Remote Work Policy,remote_policy_details
+Training/Development Spend,training_spend
+Partnership Ecosystem,partnership_ecosystem
+Exit Strategy/History,exit_strategy_history
+Carbon Footprint/Environmental Impact,carbon_footprint
+Ethical Sourcing Practices,ethical_sourcing
+Benchmark vs. Peers,benchmark_vs_peers
+Future Projections,future_projections
+Strategic Priorities,strategic_priorities
+Industry Associations / Memberships,industry_associations
+Case Studies / Public Success Stories,case_studies
+Go-to-Market Strategy,go_to_market_strategy
+Innovation Roadmap ,innovation_roadmap
+Product Pipeline,product_pipeline
+Board of Directors / Advisors,board_members
+Company Introduction / Marketing videos,marketing_video_url
+Customer testimonial,customer_testimonials
+Industry Benchmark Technology Adoption Rating,
+Total Addressable Market (TAM),tam
+Serviceable Addressable Market (SAM),sam
+Serviceable Obtainable Market (SOM),som
+Work culture,work_culture_summary
+Manager quality,manager_quality
+Psychological safety,psychological_safety
+Feedback culture,feedback_culture
+Diversity & inclusion,diversity_inclusion_score
+Ethical standards,ethical_standards
+Typical working hours,typical_hours
+Overtime expectations,overtime_expectations
+Weekend work,weekend_work
+Remote / hybrid / on-site flexibility,flexibility_level
+Leave policy,leave_policy
+Burnout risk,burnout_risk
+Central vs peripheral location,location_centrality
+Public transport access,public_transport_access
+Cab availability and company cab policy,cab_policy
+Commute time from airport,airport_commute_time
+Office zone type,office_zone_type
+Area safety,area_safety
+Company safety policies,safety_policies
+Office infrastructure safety,infrastructure_safety
+Emergency response preparedness,emergency_preparedness
+Health support,health_support
+Onboarding and training quality,onboarding_quality
+Learning culture,learning_culture
+Exposure quality,exposure_quality
+Mentorship availability,mentorship_availability
+Internal mobility,internal_mobility
+Promotion clarity,promotion_clarity
+Tools and technology access,tools_access
+Role clarity,role_clarity
+Early ownership,early_ownership
+Work impact,work_impact
+Execution vs thinking balance,execution_thinking_balance
+Automation level,automation_level
+Cross-functional exposure,cross_functional_exposure
+Company maturity,company_maturity
+Brand value,brand_value
+Client quality,client_quality
+Layoff history,layoff_history
+Fixed vs variable pay,fixed_vs_variable_pay
+Bonus predictability,bonus_predictability
+ESOPs and long-term incentives,esops_incentives
+Family health insurance,family_health_insurance
+Relocation support,relocation_support
+Lifestyle and wellness benefits,lifestyle_benefits
+Exit opportunities,exit_opportunities
+Skill relevance,skill_relevance
+External recognition,external_recognition
+Network strength,network_strength
+Global exposure,global_exposure
+Mission clarity,mission_clarity
+Sustainability and CSR,sustainability_csr
+Crisis behavior,crisis_behavior

@@ -1,0 +1,6 @@
+﻿column_name,Test ID,Test Case Description,Input Data (Case Variations),Expected Result
+Company Name,TC-CASE-COMPANYNAME-01,Validate handling of lowercase company name,microsoft corporation,Pass with normalization — Must conform to Standard Case; UTF-8 Support and match official registration (Validation: Automated & Manual)
+Company Name,TC-CASE-COMPANYNAME-02,Validate handling of uppercase company name,MICROSOFT CORPORATION,Pass with normalization — System should normalize case but ensure match to legal entity
+Company Name,TC-CASE-COMPANYNAME-03,Validate handling of mixed-case company name,MiCrOsOfT Corporation,Pass with normalization — Should resolve to registered legal company name
+Company Name,TC-CASE-COMPANYNAME-04,Validate rejection if case variation breaks legal identity match,mIcRoSoFt corp.,Fail — If fuzzy match confidence is below threshold required for legal validation
+Company Name,TC-CASE-COMPANYNAME-05,Validate proper formatting correction for case inconsistency,aPPle iNC.,Pass with auto-correction — Must align with official government registration documents

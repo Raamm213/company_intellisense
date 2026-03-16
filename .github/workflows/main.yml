@@ -38,10 +38,10 @@ jobs:
           pip install black flake8 isort
           
       - name: Run Black Code Formatter
-        run: black --check .
+        run: black --check . || (echo "Black formatting failed! Run 'black .' locally." && exit 1)
         
       - name: Run isort Import Sorter
-        run: isort --check-only --profile black .
+        run: isort --check-only --profile black . || (echo "isort failed! Run 'isort .' locally." && exit 1)
         
       - name: Run Flake8 Linter
         run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics

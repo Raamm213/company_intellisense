@@ -207,4 +207,4 @@ if __name__ == "__main__":
     print(" 🚀 COMPANY INTEL SERVER IS LIVE!")
     print(f" 🌐 Access the Dashboard at:  http://localhost:8000")
     print(" " + "═" * 60 + "\n")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)  # nosec B104

@@ -54,7 +54,7 @@ def _sanitize_regex(pattern: str) -> str:
     cleaned = pattern.strip()
     if cleaned.startswith("`") and cleaned.endswith("`"):
         cleaned = cleaned[1:-1].strip()
-    if cleaned.startswith("\"") and cleaned.endswith("\""):
+    if cleaned.startswith('"') and cleaned.endswith('"'):
         cleaned = cleaned[1:-1].strip()
     return cleaned
 
@@ -143,7 +143,8 @@ def list_csv_files() -> List[Path]:
     if not CSV_DIR.exists():
         return []
     return sorted(
-        path for path in CSV_DIR.iterdir()
+        path
+        for path in CSV_DIR.iterdir()
         if path.is_file() and path.suffix.lower() == ".csv"
     )
 
@@ -162,7 +163,9 @@ def iter_csv_rows() -> Iterable[Tuple[str, Dict[str, str]]]:
             yield source_id, row
 
 
-def build_csv_validation_report(output_filename: str = "csv_validation_results.csv") -> Path:
+def build_csv_validation_report(
+    output_filename: str = "csv_validation_results.csv",
+) -> Path:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     output_path = OUTPUT_DIR / output_filename
     rules = load_metadata()
@@ -204,7 +207,9 @@ def build_csv_validation_report(output_filename: str = "csv_validation_results.c
     return output_path
 
 
-def get_company_by_name(companies: List[Dict[str, str]], name: str) -> Optional[Dict[str, str]]:
+def get_company_by_name(
+    companies: List[Dict[str, str]], name: str
+) -> Optional[Dict[str, str]]:
     target = name.strip().lower()
     for row in companies:
         candidate = (row.get("name") or "").strip().lower()
@@ -213,7 +218,9 @@ def get_company_by_name(companies: List[Dict[str, str]], name: str) -> Optional[
     return None
 
 
-def get_value(record: Dict[str, str], column_name: str, mapping: Dict[str, str]) -> Optional[str]:
+def get_value(
+    record: Dict[str, str], column_name: str, mapping: Dict[str, str]
+) -> Optional[str]:
     csv_header = mapping.get(column_name, "")
     if not csv_header:
         return None
@@ -221,9 +228,14 @@ def get_value(record: Dict[str, str], column_name: str, mapping: Dict[str, str])
 
 
 # Company Name business rules (ID 1.5 / 1.4): official list and legal suffixes when strict_company_name=True.
-_OFFICIAL_COMPANY_NAMES = frozenset({
-    "Microsoft Corporation", "Apple Inc.", "Google LLC", "Tesla, Inc.",
-})
+_OFFICIAL_COMPANY_NAMES = frozenset(
+    {
+        "Microsoft Corporation",
+        "Apple Inc.",
+        "Google LLC",
+        "Tesla, Inc.",
+    }
+)
 _LEGAL_SUFFIXES = ("Inc.", "Ltd.", "Corp.", "LLC", "Corporation")
 
 
@@ -254,9 +266,6 @@ def validate_field_value(
         return errors
 
     if _normalize_empty(value):
-        return errors
-
-    regex = _saf   if _normalize_empty(value):
         return errors
 
     regex = _safe_compile(rule.regex_pattern)

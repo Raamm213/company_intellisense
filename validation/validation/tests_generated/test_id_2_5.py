@@ -155,7 +155,7 @@ RELATIONSHIP_RULES = [
 @pytest.fixture
 def dataset():
     try:
-        from validation_utils import load_companies, load_mapping
+        from validation_utils import Dataset, Parameter, load_companies, load_mapping
 
         companies = load_companies()
         if not companies:

@@ -1,14 +1,15 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 import asyncio
-from pydantic import BaseModel
-from typing import Dict, Any, List
-import sys
-import os
 import json
+import os
+import sys
 from pathlib import Path
+from typing import Any, Dict, List
+
+from fastapi import BackgroundTasks, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
 # Add the current directory to path so we can import main
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -82,8 +83,9 @@ async def execute_pipeline(company: str):
         print("=" * 60)
 
         try:
-            from json_to_csv_bridge import convert_json_to_csv
             import subprocess
+
+            from json_to_csv_bridge import convert_json_to_csv
 
             comp_slug = company.lower().replace(" ", "_")
             consolidated_filename = (

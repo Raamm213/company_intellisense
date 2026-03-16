@@ -13,9 +13,10 @@ Phase 2: LLM judge (only for true conflicts, batched in 1 call)
 """
 
 import json
-from schema import CompanyIntel, JudgeOutput
+
 from llm_config import get_gemini_llm
 from rate_limiter import RateLimiter
+from schema import CompanyIntel, JudgeOutput
 
 
 def _normalize(value):

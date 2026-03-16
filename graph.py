@@ -1,10 +1,12 @@
 import asyncio
-from typing import Annotated, TypedDict, Dict, Any, List, Optional
-from langgraph.graph import StateGraph, START, END
-from main import call_llm_all_chunks, rate_limiter
-from judge import run_judge
-from llm_config import get_gemini_llm, get_groq_llm, get_cerebras_llm
 import operator
+from typing import Annotated, Any, Dict, List, Optional, TypedDict
+
+from langgraph.graph import END, START, StateGraph
+
+from judge import run_judge
+from llm_config import get_cerebras_llm, get_gemini_llm, get_groq_llm
+from main import call_llm_all_chunks, rate_limiter
 
 
 # 1. Define the State
@@ -79,7 +81,7 @@ async def gemini_judge_node(state: AgentState):
     Phase 2: Use Gemini to arbitrate conflicts and fill missing data.
     This fulfills the 'gemini for specific parameters' requirement.
     """
-    from judge import llm_judge_resolve, CompanyIntel, JudgeOutput
+    from judge import CompanyIntel, JudgeOutput, llm_judge_resolve
     from main import rate_limiter
 
     data = state["final_output"]

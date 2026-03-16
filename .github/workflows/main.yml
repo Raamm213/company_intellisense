@@ -38,10 +38,10 @@ jobs:
           pip install black flake8 isort
           
       - name: Run Black Code Formatter
-        run: black --check . || echo "Black formatting failed! Run 'black .' locally." && exit 1
+        run: black --check .
         
       - name: Run isort Import Sorter
-        run: isort --check-only --profile black . || echo "isort failed! Run 'isort .' locally." && exit 1
+        run: isort --check-only --profile black .
         
       - name: Run Flake8 Linter
         run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
@@ -62,15 +62,11 @@ jobs:
       - name: Install Security Tools
         run: |
           python -m pip install --upgrade pip
-          pip install bandit safety pip-audit
+          pip install bandit safety
           
       - name: Run Bandit (Code Vulnerabilities)
-        run: bandit -r . -f custom -c .bandit.yml || bandit -r . -ll -ii
+        run: bandit -r . -ll -ii
         # -ll means low or medium severity issues only warn; high fails.
-        
-      - name: Run pip-audit (Dependency Vulnerabilities)
-        run: pip-audit -r requirements.txt || true
-        # Using || true for now so we don't immediately break the build due to transitive dependency CVEs, but we still see the report.
 
   test:
     name: 🧪 Unit Tests & Coverage

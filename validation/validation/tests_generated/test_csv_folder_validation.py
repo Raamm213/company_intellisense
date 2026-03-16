@@ -1,5 +1,4 @@
 import pytest
-
 from validation_utils import (
     build_csv_validation_report,
     iter_csv_rows,
@@ -7,7 +6,6 @@ from validation_utils import (
     load_metadata,
     validate_record_nullability,
 )
-
 
 RULES = load_metadata()
 MAPPING = load_mapping()

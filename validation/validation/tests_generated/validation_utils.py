@@ -4,7 +4,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
 
-
 BASE_DIR = Path(__file__).resolve().parents[1]
 SPECS_DIR = BASE_DIR / "specs"
 CSV_DIR = BASE_DIR / "csv"
@@ -257,6 +256,9 @@ def validate_field_value(
     if _normalize_empty(value):
         return errors
 
+    regex = _saf   if _normalize_empty(value):
+        return errors
+
     regex = _safe_compile(rule.regex_pattern)
     if regex is not None:
         if not regex.fullmatch(str(value).strip()):
@@ -270,7 +272,12 @@ def validate_field_value(
         if len(str(value)) > rule.maximum_element:
             errors.append(f"{column_name} length above maximum {rule.maximum_element}")
 
-    if strict_company_name and column_name == "Company Name" and value and str(value).strip():
+    if (
+        strict_company_name
+        and column_name == "Company Name"
+        and value
+        and str(value).strip()
+    ):
         errors.extend(_validate_company_name_business_rules(str(value).strip()))
 
     return errors
@@ -320,13 +327,17 @@ def evaluate_profile_completeness(
     if warn_threshold is not None and optional_ratio < warn_threshold:
         return ValidationResult(
             status="warn",
-            errors=[f"Optional coverage {optional_ratio:.2f} below warn threshold {warn_threshold:.2f}"],
+            errors=[
+                f"Optional coverage {optional_ratio:.2f} below warn threshold {warn_threshold:.2f}"
+            ],
         )
 
     if optional_ratio < optional_threshold:
         return ValidationResult(
             status="fail",
-            errors=[f"Optional coverage {optional_ratio:.2f} below threshold {optional_threshold:.2f}"],
+            errors=[
+                f"Optional coverage {optional_ratio:.2f} below threshold {optional_threshold:.2f}"
+            ],
         )
 
     return ValidationResult(status="pass", errors=[])

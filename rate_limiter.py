@@ -5,7 +5,7 @@ import time
 class RateLimiter:
     """
     Simple async rate limiter to avoid hitting free-tier API limits.
-    
+
     Usage:
         limiter = RateLimiter(min_interval=4.0)  # 4 seconds between calls = 15 RPM
         await limiter.wait()
@@ -29,6 +29,8 @@ class RateLimiter:
             elapsed = now - self._last_call_time
             if elapsed < self.min_interval:
                 sleep_time = self.min_interval - elapsed
-                print(f"  ⏳ Rate limiter: waiting {sleep_time:.1f}s before next API call...")
+                print(
+                    f"  ⏳ Rate limiter: waiting {sleep_time:.1f}s before next API call..."
+                )
                 await asyncio.sleep(sleep_time)
             self._last_call_time = time.monotonic()

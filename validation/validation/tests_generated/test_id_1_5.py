@@ -1,12 +1,10 @@
 import pytest
-
 from validation_utils import (
     extract_input_value,
     load_metadata,
     load_spec_rows,
     validate_field_value,
 )
-
 
 RULES = load_metadata()
 COMPANY_RULE = RULES["Company Name"]

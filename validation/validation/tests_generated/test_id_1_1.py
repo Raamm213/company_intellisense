@@ -1,12 +1,13 @@
 import re
-from typing import Dict, Any, List, Tuple
 from dataclasses import dataclass
-import pytest
+from typing import Any, Dict, List, Tuple
 
+import pytest
 
 # ============================================================
 # DATA MODELS
 # ============================================================
+
 
 @dataclass
 class Parameter:
@@ -25,6 +26,7 @@ class Dataset:
 # MASTER TEST CASE REGISTRY STRUCTURE
 # ============================================================
 
+
 class Applicability:
     CONDITIONAL = "conditional"
 
@@ -41,15 +43,13 @@ class MasterTestCase:
 # SHARED REGEX (Production Safe)
 # ============================================================
 
-COMPANY_NAME_REGEX = re.compile(
-    r"^[\w\s&.,\-\(\)'\u00C0-\u017F]+$",
-    re.UNICODE
-)
+COMPANY_NAME_REGEX = re.compile(r"^[\w\s&.,\-\(\)'\u00C0-\u017F]+$", re.UNICODE)
 
 
 # ============================================================
 # CONDITION — Applies Only To Company Name Parameter
 # ============================================================
+
 
 def company_name_condition(param: Parameter) -> bool:
     return param.name == "Company Name"
@@ -59,6 +59,7 @@ def company_name_condition(param: Parameter) -> bool:
 # TC-1.1-COMPANYNAME-01
 # Validate full legal company name format
 # ============================================================
+
 
 def tc_1_1_companyname_01_validator(param: Parameter):
     value = param.value
@@ -79,7 +80,7 @@ TC_1_1_COMPANYNAME_01 = MasterTestCase(
     test_id="TC-1.1-COMPANYNAME-01",
     applicability=Applicability.CONDITIONAL,
     condition=company_name_condition,
-    validator=tc_1_1_companyname_01_validator
+    validator=tc_1_1_companyname_01_validator,
 )
 
 
@@ -87,6 +88,7 @@ TC_1_1_COMPANYNAME_01 = MasterTestCase(
 # TC-1.1-COMPANYNAME-02
 # Validate punctuation and legal naming structure
 # ============================================================
+
 
 def tc_1_1_companyname_02_validator(param: Parameter):
     value = param.value
@@ -107,7 +109,7 @@ TC_1_1_COMPANYNAME_02 = MasterTestCase(
     test_id="TC-1.1-COMPANYNAME-02",
     applicability=Applicability.CONDITIONAL,
     condition=company_name_condition,
-    validator=tc_1_1_companyname_02_validator
+    validator=tc_1_1_companyname_02_validator,
 )
 
 
@@ -115,6 +117,7 @@ TC_1_1_COMPANYNAME_02 = MasterTestCase(
 # TC-1.1-COMPANYNAME-03
 # Validate multinational naming & UTF-8 compliance
 # ============================================================
+
 
 def tc_1_1_companyname_03_validator(param: Parameter):
     value = param.value
@@ -145,7 +148,7 @@ TC_1_1_COMPANYNAME_03 = MasterTestCase(
     test_id="TC-1.1-COMPANYNAME-03",
     applicability=Applicability.CONDITIONAL,
     condition=company_name_condition,
-    validator=tc_1_1_companyname_03_validator
+    validator=tc_1_1_companyname_03_validator,
 )
 
 
@@ -156,7 +159,7 @@ TC_1_1_COMPANYNAME_03 = MasterTestCase(
 ALL_1_1_COMPANYNAME_TESTS = [
     TC_1_1_COMPANYNAME_01,
     TC_1_1_COMPANYNAME_02,
-    TC_1_1_COMPANYNAME_03
+    TC_1_1_COMPANYNAME_03,
 ]
 
 
@@ -164,7 +167,10 @@ ALL_1_1_COMPANYNAME_TESTS = [
 # RULE ENGINE EXECUTION
 # ============================================================
 
-def evaluate_conditional(test_case: MasterTestCase, dataset: Dataset) -> List[Tuple[str, str]]:
+
+def evaluate_conditional(
+    test_case: MasterTestCase, dataset: Dataset
+) -> List[Tuple[str, str]]:
     failures = []
 
     for param in dataset.parameters:
@@ -180,28 +186,29 @@ def evaluate_conditional(test_case: MasterTestCase, dataset: Dataset) -> List[Tu
 # PYTEST FIXTURE (Replace with real loader in production)
 # ============================================================
 
+
 @pytest.fixture
 def dataset():
     try:
         from validation_utils import load_companies, load_mapping
+
         companies = load_companies()
         if not companies:
             return Dataset(parameters=[])
-        
+
         mapping = load_mapping()
         # Use the first company found in the CSV
         record = companies[0]
-        
+
         params = []
         for col_name, csv_header in mapping.items():
             val = record.get(csv_header)
             # Mark as real data for the test logic to be aware
-            params.append(Parameter(col_name, col_name, val, {'is_real_data': True}))
-            
+            params.append(Parameter(col_name, col_name, val, {"is_real_data": True}))
+
         return Dataset(parameters=params)
     except Exception:
         return Dataset(parameters=[])
-
 
 
 @pytest.mark.parametrize("test_case", ALL_1_1_COMPANYNAME_TESTS)
@@ -211,9 +218,6 @@ def test_company_name_validation(dataset, test_case):
     assert not failures, (
         f"\nValidation Failure\n"
         f"Test Case: {test_case.test_id}\n"
-        f"Failures:\n" +
-        "\n".join(
-            f"Parameter {pid}: {reason}"
-            for pid, reason in failures
-        )
+        f"Failures:\n"
+        + "\n".join(f"Parameter {pid}: {reason}" for pid, reason in failures)
     )

@@ -4,6 +4,7 @@ import pytest
 # Mocked Data Access Layer (Replace with real implementation)
 # -------------------------------------------------------------------
 
+
 class CompanyProfileService:
     """
     Simulates company profile retrieval.
@@ -15,10 +16,7 @@ class CompanyProfileService:
         Returns None if company does not exist.
         """
         # Simulating non-existent lookup
-        non_existent_entities = [
-            "FakeCorpABC",
-            "NonExistentCompanyXYZ123"
-        ]
+        non_existent_entities = ["FakeCorpABC", "NonExistentCompanyXYZ123"]
 
         if entity_name in non_existent_entities:
             return None
@@ -31,10 +29,7 @@ class CompanyProfileService:
 # Test Configuration
 # -------------------------------------------------------------------
 
-NON_EXISTENT_COMPANIES = [
-    "FakeCorpABC",
-    "NonExistentCompanyXYZ123"
-]
+NON_EXISTENT_COMPANIES = ["FakeCorpABC", "NonExistentCompanyXYZ123"]
 
 ALL_PROFILE_FIELDS = [
     "Company Name",
@@ -199,13 +194,14 @@ ALL_PROFILE_FIELDS = [
     "Global exposure",
     "Mission clarity",
     "Sustainability and CSR",
-    "Crisis behavior"
+    "Crisis behavior",
 ]
 
 
 # -------------------------------------------------------------------
 # Core Test Logic
 # -------------------------------------------------------------------
+
 
 @pytest.mark.parametrize("entity_name", NON_EXISTENT_COMPANIES)
 @pytest.mark.parametrize("field_name", ALL_PROFILE_FIELDS)

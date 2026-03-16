@@ -1,7 +1,5 @@
 import pytest
-
 from validation_utils import load_metadata, load_spec_rows
-
 
 RULES = load_metadata()
 CASES = load_spec_rows("ID 3.2.csv")

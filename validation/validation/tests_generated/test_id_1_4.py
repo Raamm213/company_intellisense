@@ -1,10 +1,12 @@
-import pytest
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
+
+import pytest
 
 # ============================================================
 # DATA MODELS
 # ============================================================
+
 
 @dataclass
 class Parameter:
@@ -23,6 +25,7 @@ class Dataset:
 # MASTER TEST STRUCTURE
 # ============================================================
 
+
 class Applicability:
     CONDITIONAL = "conditional"
 
@@ -38,6 +41,7 @@ class MasterTestCase:
 # ============================================================
 # CONDITION — Applies Only To Company Name
 # ============================================================
+
 
 def company_name_condition(param: Parameter) -> bool:
     return param.name == "Company Name"
@@ -60,9 +64,7 @@ OFFICIAL_COMPANY_NAMES = {
 def tc_1_4_companyname_01_validator(param: Parameter):
     value = param.value
     if value not in OFFICIAL_COMPANY_NAMES and not param.metadata.get("is_real_data"):
-        return (
-            "Violates business rule: Must match official government registration documents"
-        )
+        return "Violates business rule: Must match official government registration documents"
     return True
 
 
@@ -70,7 +72,7 @@ TC_1_4_COMPANYNAME_01 = MasterTestCase(
     test_id="TC-1.4-COMPANYNAME-01",
     applicability=Applicability.CONDITIONAL,
     condition=company_name_condition,
-    validator=tc_1_4_companyname_01_validator
+    validator=tc_1_4_companyname_01_validator,
 )
 
 
@@ -78,6 +80,7 @@ TC_1_4_COMPANYNAME_01 = MasterTestCase(
 # TC-1.4-COMPANYNAME-02
 # Incomplete company name
 # ============================================================
+
 
 def tc_1_4_companyname_02_validator(param: Parameter):
     value = param.value
@@ -90,7 +93,7 @@ TC_1_4_COMPANYNAME_02 = MasterTestCase(
     test_id="TC-1.4-COMPANYNAME-02",
     applicability=Applicability.CONDITIONAL,
     condition=company_name_condition,
-    validator=tc_1_4_companyname_02_validator
+    validator=tc_1_4_companyname_02_validator,
 )
 
 
@@ -98,6 +101,7 @@ TC_1_4_COMPANYNAME_02 = MasterTestCase(
 # TC-1.4-COMPANYNAME-03
 # Abbreviated / truncated company name
 # ============================================================
+
 
 def tc_1_4_companyname_03_validator(param: Parameter):
     value = param.value
@@ -110,7 +114,7 @@ TC_1_4_COMPANYNAME_03 = MasterTestCase(
     test_id="TC-1.4-COMPANYNAME-03",
     applicability=Applicability.CONDITIONAL,
     condition=company_name_condition,
-    validator=tc_1_4_companyname_03_validator
+    validator=tc_1_4_companyname_03_validator,
 )
 
 
@@ -118,6 +122,7 @@ TC_1_4_COMPANYNAME_03 = MasterTestCase(
 # TC-1.4-COMPANYNAME-04
 # Phonetic misspelling
 # ============================================================
+
 
 def tc_1_4_companyname_04_validator(param: Parameter):
     value = param.value
@@ -133,7 +138,7 @@ TC_1_4_COMPANYNAME_04 = MasterTestCase(
     test_id="TC-1.4-COMPANYNAME-04",
     applicability=Applicability.CONDITIONAL,
     condition=company_name_condition,
-    validator=tc_1_4_companyname_04_validator
+    validator=tc_1_4_companyname_04_validator,
 )
 
 
@@ -143,6 +148,7 @@ TC_1_4_COMPANYNAME_04 = MasterTestCase(
 # ============================================================
 
 LEGAL_SUFFIXES = ["Inc.", "Ltd.", "Corp.", "LLC", "Corporation"]
+
 
 def tc_1_4_companyname_05_validator(param: Parameter):
     value = param.value
@@ -155,7 +161,7 @@ TC_1_4_COMPANYNAME_05 = MasterTestCase(
     test_id="TC-1.4-COMPANYNAME-05",
     applicability=Applicability.CONDITIONAL,
     condition=company_name_condition,
-    validator=tc_1_4_companyname_05_validator
+    validator=tc_1_4_companyname_05_validator,
 )
 
 
@@ -168,7 +174,7 @@ ALL_1_4_COMPANYNAME_TESTS = [
     TC_1_4_COMPANYNAME_02,
     TC_1_4_COMPANYNAME_03,
     TC_1_4_COMPANYNAME_04,
-    TC_1_4_COMPANYNAME_05
+    TC_1_4_COMPANYNAME_05,
 ]
 
 
@@ -176,7 +182,10 @@ ALL_1_4_COMPANYNAME_TESTS = [
 # RULE ENGINE
 # ============================================================
 
-def evaluate_conditional(test_case: MasterTestCase, dataset: Dataset) -> List[Tuple[str, str]]:
+
+def evaluate_conditional(
+    test_case: MasterTestCase, dataset: Dataset
+) -> List[Tuple[str, str]]:
     failures = []
 
     for param in dataset.parameters:
@@ -192,28 +201,29 @@ def evaluate_conditional(test_case: MasterTestCase, dataset: Dataset) -> List[Tu
 # PYTEST FIXTURE (Replace with real loader)
 # ============================================================
 
+
 @pytest.fixture
 def dataset():
     try:
         from validation_utils import load_companies, load_mapping
+
         companies = load_companies()
         if not companies:
             return Dataset(parameters=[])
-        
+
         mapping = load_mapping()
         # Use the first company found in the CSV
         record = companies[0]
-        
+
         params = []
         for col_name, csv_header in mapping.items():
             val = record.get(csv_header)
             # Mark as real data for the test logic to be aware
-            params.append(Parameter(col_name, col_name, val, {'is_real_data': True}))
-            
+            params.append(Parameter(col_name, col_name, val, {"is_real_data": True}))
+
         return Dataset(parameters=params)
     except Exception:
         return Dataset(parameters=[])
-
 
 
 # Business-rule tests use invalid/malformed names; we expect the validator to reject them (report failures).
@@ -232,10 +242,11 @@ def test_company_name_business_rules(dataset, test_case):
     failed_ids = {pid for pid, _ in failures}
     expected = EXPECTED_BUSINESS_FAILURES.get(test_case.test_id, set())
 
-    if any(p.metadata.get('is_real_data') for p in dataset.parameters): expected = set()
+    if any(p.metadata.get("is_real_data") for p in dataset.parameters):
+        expected = set()
     assert failed_ids == expected, (
         f"\nBusiness rules: expected failures for {expected}, got {failed_ids}\n"
         f"Test Case: {test_case.test_id}\n"
-        f"Failures:\n" +
-        "\n".join(f"Parameter {pid}: {reason}" for pid, reason in failures)
+        f"Failures:\n"
+        + "\n".join(f"Parameter {pid}: {reason}" for pid, reason in failures)
     )

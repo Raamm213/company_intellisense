@@ -12,3 +12,8 @@ python-dotenv
 aiohttp
 pytest
 pandas
+pytest-cov
+black
+flake8
+isort
+bandit

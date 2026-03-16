@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional, Dict, Any, Union
 
+
 class CompanyOverview(BaseModel):
     @field_validator("*", mode="before")
     @classmethod
@@ -68,6 +69,7 @@ class CompanyOverview(BaseModel):
     tam: Optional[str] = None
     sam: Optional[str] = None
     som: Optional[str] = None
+
 
 class CompanyCulture(BaseModel):
     @field_validator("*", mode="before")
@@ -141,6 +143,7 @@ class CompanyCulture(BaseModel):
     network_strength: Optional[str] = None
     global_exposure: Optional[str] = None
 
+
 class CompanyFinancials(BaseModel):
     @field_validator("*", mode="before")
     @classmethod
@@ -201,11 +204,13 @@ class CompanyFinancials(BaseModel):
     partnership_ecosystem: Optional[str] = None
     tech_adoption_rating: Optional[str] = None
 
+
 # ─── Combined Flat Model (all 163 fields from Overview + Culture + Financials) ───
+
 
 class CompanyIntel(BaseModel):
     """Single consolidated Pydantic model with ALL company intelligence fields."""
-    
+
     @field_validator("*", mode="before")
     @classmethod
     def validate_strings(cls, v: Any) -> Any:
@@ -389,10 +394,13 @@ class CompanyIntel(BaseModel):
 
 class JudgeOutput(BaseModel):
     """Agent 2 output: consolidated best-of-breed result with source tracking."""
+
     company_name: str
     consolidated: CompanyIntel
-    source_map: Dict[str, str] = {}      # field_name -> "gemini" | "groq" | "openrouter" | "majority" | "longest" | "llm_judge" | "llm_filled"
-    conflict_fields: list[str] = []       # fields that had all-3-disagree conflicts
-    missing_fields: list[str] = []        # fields that were None in all 3 LLM outputs
-    llm_judged_fields: list[str] = []     # fields resolved by LLM judge call (conflicts)
-    llm_filled_fields: list[str] = []     # fields filled by LLM judge call (missing)
+    source_map: Dict[str, str] = (
+        {}
+    )  # field_name -> "gemini" | "groq" | "openrouter" | "majority" | "longest" | "llm_judge" | "llm_filled"
+    conflict_fields: list[str] = []  # fields that had all-3-disagree conflicts
+    missing_fields: list[str] = []  # fields that were None in all 3 LLM outputs
+    llm_judged_fields: list[str] = []  # fields resolved by LLM judge call (conflicts)
+    llm_filled_fields: list[str] = []  # fields filled by LLM judge call (missing)

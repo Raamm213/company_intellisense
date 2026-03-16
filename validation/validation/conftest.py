@@ -3,7 +3,6 @@ from pathlib import Path
 
 import pytest
 
-
 OUTPUT_DIR = Path(__file__).resolve().parent / "output"
 
 

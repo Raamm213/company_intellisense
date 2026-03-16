@@ -1,16 +1,18 @@
 import asyncio
-from pathlib import Path
-from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import PydanticOutputParser
-from schema import CompanyOverview, CompanyCulture, CompanyFinancials
-from llm_config import get_gemini_llm, get_groq_llm, get_cerebras_llm
-from rate_limiter import RateLimiter
-from judge import run_judge
 import json
 import os
 import subprocess
 import time
+from pathlib import Path
+
+from langchain_core.output_parsers import PydanticOutputParser
+from langchain_core.prompts import PromptTemplate
+
 from json_to_csv_bridge import convert_json_to_csv
+from judge import run_judge
+from llm_config import get_cerebras_llm, get_gemini_llm, get_groq_llm
+from rate_limiter import RateLimiter
+from schema import CompanyCulture, CompanyFinancials, CompanyOverview
 
 template = """
 You are a senior corporate intelligence analyst with access to the latest public data.
@@ -38,11 +40,14 @@ rate_limiter = RateLimiter(min_interval=4.0)
 
 def create_prompt(pydantic_object):
     parser = PydanticOutputParser(pydantic_object=pydantic_object)
-    return PromptTemplate(
-        template=template,
-        input_variables=["company_name"],
-        partial_variables={"format_instructions": parser.get_format_instructions()}
-    ), parser
+    return (
+        PromptTemplate(
+            template=template,
+            input_variables=["company_name"],
+            partial_variables={"format_instructions": parser.get_format_instructions()},
+        ),
+        parser,
+    )
 
 
 async def call_llm_chunk(name, llm, company_name, chunk_name, chunk_model):
@@ -55,14 +60,17 @@ async def call_llm_chunk(name, llm, company_name, chunk_name, chunk_model):
         await rate_limiter.wait()
         response = await llm.ainvoke(formatted_prompt)
         parsed_result = parser.parse(response.content)
-        
+
         # Capture tokens if provided by LangChain metadata
-        if hasattr(response, "response_metadata") and "token_usage" in response.response_metadata:
+        if (
+            hasattr(response, "response_metadata")
+            and "token_usage" in response.response_metadata
+        ):
             usage = response.response_metadata["token_usage"]
             tokens = usage.get("total_tokens", usage.get("total_tokens", 0))
-        elif hasattr(response, "usage_metadata"): # Newer LangChain
+        elif hasattr(response, "usage_metadata"):  # Newer LangChain
             tokens = response.usage_metadata.get("total_tokens", 0)
-            
+
         print(f"  [{name}] [OK] {chunk_name} done. ({tokens} tokens)")
         return chunk_name, parsed_result.model_dump(), tokens
     except Exception as e:
@@ -82,7 +90,9 @@ async def call_llm_all_chunks(name, llm, company_name):
     combined = {}
     total_tokens = 0
     for chunk_name, chunk_model in chunks.items():
-        _, data, tokens = await call_llm_chunk(name, llm, company_name, chunk_name, chunk_model)
+        _, data, tokens = await call_llm_chunk(
+            name, llm, company_name, chunk_name, chunk_model
+        )
         combined.update(data)
         total_tokens += tokens
 
@@ -119,7 +129,9 @@ async def run_pipeline(company_name):
     results = {}
     total_tokens = 0
     for name, model in models.items():
-        model_name, result, tokens = await call_llm_all_chunks(name, model, company_name)
+        model_name, result, tokens = await call_llm_all_chunks(
+            name, model, company_name
+        )
         results[model_name] = result
         total_tokens += tokens
 
@@ -137,10 +149,11 @@ async def run_pipeline(company_name):
 
     # Step 6: Data Validation
     from validator import CompanyValidator
+
     _v = CompanyValidator()
     validation_results = _v.validate(consolidated_data)
 
-    duration = round(time.time() - start_time, 1) # Calculate duration
+    duration = round(time.time() - start_time, 1)  # Calculate duration
 
     # Build final output
     final_output = {
@@ -156,15 +169,16 @@ async def run_pipeline(company_name):
         "metrics": {
             "tokens_used": total_tokens,
             "parameter_count": len(consolidated_data),
-            "time_taken": duration # Added time_taken to metrics
+            "time_taken": duration,  # Added time_taken to metrics
         },
-        "validation": validation_results
+        "validation": validation_results,
     }
 
     return final_output
 
 
 from supabase_client import push_agent1_raw, push_agent2_raw
+
 
 def save_results(company: str, output: dict):
     """Save raw and consolidated results to their respective directories and Supabase."""
@@ -173,7 +187,12 @@ def save_results(company: str, output: dict):
         push_agent1_raw(company, agent_name, raw_data)
 
     # 2. Store Agent 2 Consolidated Data to Supabase
-    push_agent2_raw(company, output.get("consolidated", {}), output.get("metrics", {}), output.get("validation", {}))
+    push_agent2_raw(
+        company,
+        output.get("consolidated", {}),
+        output.get("metrics", {}),
+        output.get("validation", {}),
+    )
 
     # Save full output locally (includes agent1 raw + consolidated + metadata)
     intel_dir = Path("intel")
@@ -187,11 +206,15 @@ def save_results(company: str, output: dict):
     consolidated = output["consolidated"]
     consolidated_dir = Path("consolidated")
     consolidated_dir.mkdir(exist_ok=True)
-    consolidated_filename = consolidated_dir / f"{company.lower().replace(' ', '_')}_consolidated.json"
+    consolidated_filename = (
+        consolidated_dir / f"{company.lower().replace(' ', '_')}_consolidated.json"
+    )
     with open(consolidated_filename, "w", encoding="utf-8") as f:
         json.dump(consolidated, f, indent=4)
-    print(f"[OK] Consolidated output saved to: {os.path.abspath(consolidated_filename)}")
-    
+    print(
+        f"[OK] Consolidated output saved to: {os.path.abspath(consolidated_filename)}"
+    )
+
     return filename, consolidated_filename
 
 
@@ -226,32 +249,32 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("[TEST] PHASE 3: AUTOMATED VALIDATION")
     print("=" * 60)
-    
+
     # Define paths
     base_dir = Path(__file__).resolve().parent
     val_dir = base_dir.parent / "validation" / "validation"
     output_csv = val_dir / "csv" / "companies.csv"
     mapping_file = val_dir / "tests_generated" / "metadata_mapping.csv"
-    
+
     # 1. Convert JSON to CSV for validation
     try:
         convert_json_to_csv(consolidated_filename, str(output_csv), str(mapping_file))
-        
+
         # 2. Run Pytest
         print(f"\n[RUN] Running validation tests in {val_dir}...")
         # We run from the validation directory to ensure conftest.py is picked up
         result = subprocess.run(
-            ["pytest", "tests_generated"], 
+            ["pytest", "tests_generated"],
             cwd=str(val_dir),
             capture_output=True,
-            text=True
+            text=True,
         )
-        
+
         print(result.stdout)
         if result.stderr:
             print(f"[WARN]  Pytest Errors:\n{result.stderr}")
-            
+
         print(f"\n[OK] Validation complete. Reports saved in: {val_dir / 'output'}")
-        
+
     except Exception as e:
         print(f"[FAIL] Validation failed to run: {e}")
